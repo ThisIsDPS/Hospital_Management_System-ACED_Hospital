@@ -1,0 +1,2158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ACED Hospital</title>
+
+    <link rel="icon" href="home_page/hospital_logo.jpeg">
+    <!-- for favicon-->
+
+    <script src="https://kit.fontawesome.com/e6d663bc90.js" crossorigin="anonymous"></script>
+    <!-- for icons from fontawesome for navigation bar-->
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <!-- both are used for footer icons -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Baloo+Bhai+2&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Calistoga&family=Ibarra+Real+Nova:wght@700&family=Kanit:wght@900&family=PT+Sans&family=Roboto:wght@100&family=Rubik+Moonrocks&display=swap"
+        rel="stylesheet">
+    <!-- for google fonts -->
+
+    <!--  used for styling navigation bar-->
+    <style>
+        /* for navigation link , spcifying width and position */
+        nav#navigation_link {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 10%;
+            height: 100%;
+            background-image: linear-gradient(to bottom, #2193b0, #6dd5ed);
+            z-index: 5;
+            font-family: serif;
+        }
+
+        #navigation_link #nav_list {
+            list-style-type: none;
+            margin: 30px 0;
+        }
+
+        /* <a> tag in navigation list*/
+        #nav_list li>a {
+            text-decoration: none;
+            display: inline-block;
+            width: 100%;
+            text-align: left;
+            padding: 10px 5px;
+            border-radius: 4px;
+            color: black;
+            font-size: 130%;
+            text-align: center;
+        }
+
+        #nav_list li>a+span {
+            display: none;
+        }
+
+        #nav_list li>a:hover {
+            border: 2px solid #2193b0;
+            background-color: white;
+            color: #2193b0;
+            z-index: 3;
+            text-align: center;
+            width: 100%;
+        }
+
+        #nav_list li>a:active {
+            color: red;
+            border-color: red;
+        }
+
+        #nav_list li>a:active+span {
+            color: red;
+            border-color: red;
+        }
+
+        #nav_list li:hover>span {
+            display: inline-block;
+            position: absolute;
+            left: 105%;
+            padding: 12px 16px;
+            background-color: white;
+            color: #2193b0;
+            font-weight: bold;
+            border-radius: 10px;
+            border: 2px solid #2193b0;
+            overflow-x: visible;
+        }
+
+        /* changing the color of icons on hover */
+        #nav_list li>a:hover .fa-solid {
+            color: #2193b0;
+        }
+
+        #nav_list li>a:active .fa-solid {
+            color: red;
+        }
+
+        .fa-solid {
+            font-size: 130%;
+            color: white;
+        }
+    </style>
+
+    <!-- used to style dashboard and home -->
+    <style>
+        /* whole content will be displayed in this block*/
+        #dashboard {
+            position: absolute;
+            top: 0;
+            margin-left: 10%;
+            width: 90%;
+            overflow: auto;
+            background-color: rgb(230, 243, 255);
+        }
+
+        /* styling main content*/
+        .main-content {
+            width: 85%;
+            margin: 3% auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+        }
+
+        /* styling the search bar */
+        #searchbar {
+            width: 40%;
+            text-align: center;
+            background-color: white;
+        }
+
+        #searchbar form img {
+            position: relative;
+            top: 3px;
+            width: 16px;
+        }
+
+        #searchbar div {
+            display: inline-block;
+            border: 1px solid black;
+            background-color: white;
+            padding: 2px 4px;
+            margin: 0px auto;
+            border-radius: 20px;
+            position: relative;
+            bottom: 10%;
+            z-index: 2;
+        }
+
+        #searchbar input[type=search] {
+            border: none;
+            outline: none;
+            border-radius: 20px;
+        }
+
+        /* styling image heading*/
+        #image-heading {
+            width: 60%;
+            color: white;
+            text-shadow: 2px 2px 4px black;
+            box-shadow: 8px 8px 8px 0px rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+            overflow: auto;
+        }
+
+        #image-heading h1 {
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+        }
+
+        .overlap {
+            position: absolute;
+            background-color: rgba(33, 147, 176, 0.4);
+            height: 100%;
+            width: 100%;
+            padding-left: 3%;
+            overflow: auto;
+        }
+
+        /* styling doctor recommendations */
+        #main_inner {
+            width: 40%;
+        }
+
+        #main_inner,
+        #main_inner td {
+            border-spacing: 10px;
+            text-align: center;
+        }
+
+        #main_inner tbody td {
+            background-color: white;
+            color: black;
+            text-align: center;
+            box-shadow: 0px 0px 8px 1px rgba(0, 0, 255, 0.5);
+        }
+
+        #main_inner thead td:hover {
+            box-shadow: 0px 0px 8px 1px rgba(0, 0, 255, 0.5);
+        }
+
+        /* styling links */
+        .links {
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .links a {
+            display: inline-block;
+            min-width: 20%;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            background-color: #2193b0;
+        }
+
+        .links a:hover {
+            color: #2193b0;
+            background-color: white;
+            border: 2px solid #2193b0;
+        }
+
+        .links a:active {
+            color: red;
+            border-color: red;
+
+        }
+
+        /* styling top-services */
+        #top-services {
+            width: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0px 0px 8px 1px rgba(0, 0, 255, 0.5);
+        }
+
+        #top-services article {
+            position: relative;
+            width: 80%;
+        }
+
+        #top-services article div {
+            display: none;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            overflow: auto;
+        }
+
+        #top-services article div,
+        #top-services article p {
+            margin: 5px auto 0px;
+            padding: 10px;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            border: 1px solid black;
+            background-color: white;
+        }
+
+        #top-services div:target {
+            display: block;
+            z-index: 2;
+        }
+    </style>
+
+    <!-- used to style services page -->
+    <style>
+        #services {
+            width: 95%;
+            margin: 20px auto;
+            position: relative;
+        }
+
+        #services img {
+            width: 100%;
+            height: auto;
+        }
+
+        #services .overlap {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+            padding: 1%;
+        }
+
+        #services #facilities {
+            width: 19%;
+            list-style-type: none;
+            background-color: rgba(255, 255, 255, 1);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            overflow: auto;
+            background-color: rgba(255, 255, 255, 0.0);
+        }
+
+        #services #facilities h1 {
+            color: rgb(15, 193, 248);
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+            text-align: left;
+            background-color: rgba(255, 255, 255, 1);
+            padding: 10px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+
+        }
+
+        #services #facilities a {
+            display: block;
+            text-align: left;
+            padding: 10px;
+            border: 2px solid #2193b0;
+            color: #2193b0;
+            border-bottom: none;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: white;
+        }
+
+        #services #facilities li:last-child a {
+            border-bottom: 2px solid #2193b0;
+        }
+
+        #services #facilities a:hover {
+            background-image: linear-gradient(to bottom, #2193b0, #6dd5ed);
+            color: white;
+        }
+
+        #services #facilities a:active {
+            background-image: none;
+            background-color: red;
+            border-color: red;
+        }
+
+        #services #service-frame {
+            width: 79%;
+        }
+    </style>
+
+    <!-- used for styling about us page  -->
+    <style>
+        #about-us {
+            width: 85%;
+            margin: auto;
+            padding: 0 5%;
+            color: white;
+            font-size: 150%;
+            line-height: 1.5;
+            text-align: justify;
+        }
+
+        #about-us h1 {
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+            text-align: center;
+        }
+
+        #about-us h3 {
+            text-align: center;
+        }
+
+        #about-us p {
+            padding: 5px;
+        }
+
+        #about-us .One {
+            width: 50%;
+            padding-left: 10px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+        }
+
+        #about-us .Two {
+            width: 50%;
+            padding-right: 10px;
+            background-image: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5));
+        }
+
+        #about-us .Three {
+            clear: both;
+        }
+
+        #about-us {
+            background-image: url('https://thumbs.gfycat.com/SpottedGleamingIrishdraughthorse-size_restricted.gif');
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-color: rgb(59, 126, 251);
+        }
+    </style>
+
+    <!-- for styling our doctors page -->
+    <style>
+        #our-doctors {
+            font-family: 'Roboto Condensed', sans-serif;
+        }
+
+        #our-doctors h1 {
+            color: rgb(15, 193, 248);
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+            text-align: center;
+        }
+
+        #our-doctors #outerBox {
+            width: 85%;
+            margin: auto;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+        }
+
+        #our-doctors .box {
+            border: 2px solid #2193b0;
+            width: 30%;
+            border-radius: 16px;
+            box-shadow: 3px 3px rgb(120, 172, 140);
+            background-color: rgb(245, 255, 255);
+            padding: 10px 10px 10px 4px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        #our-doctors .innerBox1 {
+            width: 60%;
+            height: 300px;
+            display: block;
+            margin: auto;
+            border-radius: 20px;
+            border: 2px solid #2193b0;
+        }
+
+        #our-doctors .innerBox2 {
+            margin: 5px auto;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #our-doctors .innerBox3 {
+            margin: 5px 0;
+            text-align: center;
+            color: #2193b0;
+        }
+
+        #our-doctors .book-appointement a {
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+
+        #our-doctors .book-appointement a {
+            display: inline-block;
+            min-width: 10%;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            background-color: #2193b0;
+        }
+
+        #our-doctors .book-appointement a:hover {
+            color: #2193b0;
+            background-color: white;
+            border: 2px solid #2193b0;
+        }
+
+        #our-doctors .book-appointement a:active {
+            color: red;
+            border-color: red;
+
+        }
+    </style>
+
+    <style>
+        #login {
+            background: url('https://wallpaperaccess.com/full/185893.jpg');
+            background-size: 100% 100%;
+            background-attachment: scroll;
+            width: 85%;
+            margin: auto;
+            padding: 10% 0;
+            text-align: center;
+        }
+
+        #login #whole {
+            align-items: center;
+        }
+
+        #login #container {
+            margin: auto;
+            width: 50%;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+        }
+
+        #login #form {
+            width: 100%
+        }
+
+        #login #container table {
+            width: 100%;
+        }
+
+        #login #container input[type="text"],
+        #login #container input[type="password"],
+        select {
+            border-radius: 5px;
+            border: 1px solid;
+            padding: 0 5px;
+            outline: none;
+        }
+        
+        #login #container input[type="submit"] {
+            text-align: center;
+            padding: 10px 0;
+            display: inline-block;
+            margin: auto;
+            min-width: 20%;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            background-color: #2193b0;
+            border: none;
+        }
+
+        #login #container input[type="submit"]:hover {
+            color: #2193b0;
+            background-color: white;
+            border: 2px solid #2193b0;
+
+        }
+
+        #login #container input[type="submit"]:active {
+            color: red;
+            border-color: red;
+        }
+
+        #login td {
+            padding: 10px;
+            width: 50%;
+        }
+
+        #login td:first-child {
+            font-weight: bold;
+            font-size: large;
+            text-align: right;
+        }
+
+        #login td:last-child {
+            text-align: left;
+        }
+
+        #login table caption {
+            padding: 10px;
+        }
+    </style>
+    <!-- for login form -->
+    <script>
+        function check() {
+            var option = document.getElementById("selection").value;
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            if (option = "doctor" && username == "doctor" && password == 1234) {
+                window.open("#our-doctors");
+            }
+            else if (option = "patient" && username == "patient" && password == 5678) {
+                window.open("#appointement");
+            }
+            else {
+                alert("LOGIN FAILED! No account with these credentials was found.");
+            }
+        }
+    </script>
+
+    <!-- used to style the registration form  and appointement form -->
+    <style>
+        #appointement h1,
+        #registration h1 {
+            color: rgb(15, 193, 248);
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+            text-align: center;
+        }
+
+        /* setting background */
+        #appointement {
+            background-image: url('https://mascmedical.com/wp-content/uploads/2020/04/images-4.jpg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            width: 85%;
+            margin: 20px auto;
+        }
+
+        #registration {
+            background-image: url('https://mascmedical.com/wp-content/uploads/2020/04/AdobeStock_284088929-scaled-1.jpeg');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            margin: 20px auto;
+            width: 85%;
+        }
+
+        /* setting table width */
+        #appointement table.center,
+        #registration table.center {
+            width: 50%;
+            border-spacing: 10px;
+            border-radius: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
+        }
+
+        /*set the cells width */
+        #appointement td {
+            width: 20%;
+            padding: 40px 0px;
+        }
+
+        #registration td {
+            width: 25%;
+            padding: 20px 0px;
+        }
+
+        #registration table #caption {
+            text-align: center;
+            background-color: white;
+            border-radius: 20px;
+        }
+
+        #appointement .center,
+        #registration .center {
+            margin: auto;
+        }
+
+        #appointement td:nth-child(odd),
+        #registration td:nth-child(odd) {
+            text-align: right;
+        }
+
+        #appointement td:nth-child(even),
+        #registration td:nth-child(even) {
+            text-align: left;
+        }
+
+        #appointement label,
+        #registration label {
+            font-weight: bold;
+        }
+
+        #appointement input[type],
+        #registration input[type]:not(input[type=file]) {
+            outline: none;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding-left: 3px;
+            height: 20px;
+        }
+
+        #appointement .text-center,
+        #appointement .Logo,
+        #registration .Logo {
+            text-align: center;
+        }
+
+        #appointement .button,
+        #registration .button {
+            text-align: center;
+            padding: 10px 0;
+            display: inline-block;
+            min-width: 20%;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            background-color: #2193b0;
+            border: none;
+        }
+
+        #appointement .button:hover,
+        #registration .button:hover {
+            color: #2193b0;
+            background-color: white;
+            border: 2px solid #2193b0;
+        }
+
+        #appointement .button:active,
+        #registration .button:active {
+            color: red;
+            border-color: red;
+        }
+
+        #appointement {
+            display: none;
+        }
+
+        #appointement:target {
+            display: block;
+        }
+
+        #appointement:target~section,#appointement:target~footer{
+            display: none;
+        }
+    </style>
+
+    <!-- used to style blogs section -->
+    <style>
+        #blogs {
+            width: 85%;
+            margin: auto;
+        }
+
+        #blogs h1 {
+            color: rgb(15, 193, 248);
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+            text-align: center;
+        }
+
+        #blogs #outerBox {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+            margin: 20px auto;
+        }
+
+        #blogs .box {
+            width: 35%;
+            margin-bottom: 40px;
+            border: 2px solid rgb(228, 254, 255);
+            background-color: rgba(245, 245, 245, 0.541);
+            box-shadow: 0 0 8px 0 rgb(0, 0, 0, 0.5);
+            padding: 10px 18px;
+            position: relative;
+        }
+
+        #blogs img {
+            width: 100%;
+        }
+
+        #blogs .que {
+            font-size: 25px;
+            font-weight: bold;
+            color: black;
+            padding: 10px;
+            text-align: center;
+            text-decoration: none;
+            line-height: 2rem;
+        }
+
+        #blogs .que:hover {
+            color: rgb(15, 193, 248);
+            text-decoration: underline;
+        }
+
+        #blogs .author {
+            border: 2px solid rgb(179, 179, 179);
+            text-align: center;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            font-weight: bold;
+        }
+    </style>
+
+    <!-- used to style review page -->
+    <style>
+        /* styling review page */
+        #review {
+            font-family: 'Baloo Bhai 2', cursive;
+            width: 85%;
+            margin: 20px auto;
+        }
+
+        #review #top {
+            text-align: center;
+            color: rgb(15, 193, 248);
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+        }
+
+        #review #outerBox {
+            width: 100%;
+            margin: auto;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+        }
+
+        #review .box {
+            background-color: rgba(245, 245, 245, 0.541);
+            width: 30%;
+            margin-top: 10px;
+            margin-left: 10px;
+            box-shadow: 3px 3px #a37da0;
+        }
+
+        #review .photo {
+            width: 90px;
+            padding-top: 2px;
+            margin: 3px auto;
+            text-align: center;
+        }
+
+        #review .stars {
+            width: 42px;
+            padding: 0px;
+            margin: 3px auto;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #review .review {
+            margin: 3px auto;
+            padding: 15px;
+            line-height: 1.3rem;
+            text-align: center;
+
+        }
+
+        #review .name {
+            padding: 6px;
+            margin: 3px auto;
+            text-align: center;
+            font-style: italic;
+            font-weight: bold;
+
+        }
+
+        #review .image {
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            border: 4px solid rgb(238, 204, 210);
+        }
+    </style>
+
+    <!--used to style the gallery-->
+    <style>
+        /* styling gallery */
+        #gallery-heading h1 {
+            color: rgb(15, 193, 248);
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+        }
+
+        #gallery {
+            width: 85%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px auto;
+            text-align: center;
+        }
+
+        #gallery>.column {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #gallery img {
+            width: 100%;
+            vertical-align: middle;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        #gallery figure {
+            margin: 4px;
+        }
+
+        #gallery figure:hover {
+            border: 3px solid black;
+            border-radius: 10px;
+        }
+
+        #gallery figure:hover figcaption {
+            border: none;
+        }
+
+        #gallery figcaption {
+            background-color: white;
+            color: black;
+            font-size: 120%;
+            border: 2px solid gray;
+            border-top: none;
+            width: 100%;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+    </style>
+
+    <!-- used to style th contact form -->
+    <style>
+        #contact-us {
+            width: 85%;
+            margin: 30px auto;
+            padding: 5px 5%;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+            background-image: url(/home_page/contact_form_background.jpg);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            border: 4px solid #2193b0;
+        }
+
+        #contact-us h1 {
+            width: 100%;
+            color: rgb(15, 193, 248);
+            text-shadow: 3px 3px 3px #000;
+            font-size: 300%;
+            text-align: center;
+        }
+
+        #contact-us #form {
+            width: 50%;
+        }
+
+        #contact-us table {
+            width: 100%;
+        }
+
+        #contact-us #form td {
+            width: 48%;
+            padding: 4%;
+            margin: auto;
+        }
+
+        #contact-us #form tr td:nth-child(1) {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        #contact-us #form td:nth-child(2) {
+            text-align: left;
+        }
+
+        #contact-us #contact-info {
+            width: 50%;
+            text-align: right;
+        }
+
+        #contact-us #contact-info .para {
+            margin: 8%;
+        }
+
+        #contact-us button {
+            border: none;
+            text-align: center;
+            padding: 10px 0;
+            display: inline-block;
+            min-width: 20%;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px;
+            color: white;
+            background-color: #2193b0;
+        }
+
+        #contact-us button:hover {
+            color: #2193b0;
+            background-color: white;
+            border: 2px solid #2193b0;
+        }
+
+        #contact-us button:active {
+            color: red;
+            border-color: red;
+        }
+    </style>
+
+    <!-- used to style footer -->
+    <style>
+        /* styling footer*/
+        #footer {
+            color: white;
+            width: 100%;
+            line-height: 200%;
+        }
+
+        #footer #footUp {
+            background-color: rgba(51, 51, 51, 0.918);
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+            font-family: 'PT Sans', sans-serif;
+        }
+
+        /* about */
+        #footer #about {
+            width: 24%;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* about logo */
+        #footer #logo {
+            float: left;
+            line-height: normal;
+            font-family: 'Calistoga', cursive;
+            font-weight: bold;
+            color: rgb(15, 193, 248);
+            text-shadow: 2.5px 2.5px rgba(0, 0, 0, 0.945);
+            background-color: whitesmoke;
+            border: 1px solid rgba(0, 0, 0, 0.829);
+            font-size: 35px;
+            width: 120px;
+            text-align: center;
+            border-radius: 4px;
+            box-shadow: 2px 2px rgba(0, 0, 0, 0.856);
+        }
+
+        /* about content */
+        #footer #abt {
+            display: inline-block;
+            padding: 5px;
+            text-align: left;
+            line-height: 150%;
+        }
+
+        /* quicklinks */
+        #footer #quickLinks {
+            width: 24%;
+            padding: 30px;
+        }
+
+        /* ourservices */
+        #footer #ourServices {
+            width: 24%;
+            padding: 30px;
+        }
+
+        /* contact us */
+        #footer #contactUs {
+            width: 24%;
+            padding: 30px;
+        }
+
+
+        #footer .footUpHeads {
+            font-family: "PT Sans", sans-serif;
+            color: rgba(245, 245, 245, 0.959);
+            text-shadow: 1.6px 1.6px rgb(0, 0, 0);
+        }
+
+        #footer .footUpCategories,
+        #footer #mail {
+            display: inline-block;
+            text-decoration: none;
+            color: white;
+        }
+
+        #footer .footUpCategories:hover,
+        #footer #mail:hover {
+            text-decoration: underline;
+        }
+
+        #footer #footDown {
+            background-color: rgba(51, 51, 51, 0.993);
+            padding: 20px 0px;
+            width: 100%;
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+        }
+
+        /* rights reserved*/
+        #footer #rightsReserved {
+            width: 46%;
+            line-height: 25px;
+            margin: auto 0px;
+        }
+
+        #footer #allRiRe2,
+        #allRiRe3 {
+            color: rgb(15, 193, 248);
+        }
+
+        /*social mediaa links*/
+        #footer #socialMediaLinks {
+            text-align: right;
+            width: 48%;
+        }
+
+        #footer .footlink {
+            color: grey;
+            margin: 0 10px;
+            font-size: 25px;
+            text-decoration: none;
+        }
+
+        #footer .footlink:hover {
+            color: rgba(255, 255, 255, 0.692);
+        }
+    </style>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: "baloo bhai 2", cursive;
+        background-color: rgb(230, 243, 255);
+    }
+
+    /* for scroll bars changing width and color*/
+    ::-webkit-scrollbar {
+        width: 4px;
+        border: 1px solid #d5d5d5;
+    }
+
+    ::webkit-scrollbar-track {
+        border-radius: 4px;
+        background-color: #eeeeee;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        border-radius: 4px;
+        background-color: rgb(86, 85, 85);
+    }
+
+    ::-webkit-scrollbar-thumb:horizontal{
+        border: 20px;
+        background-color: rgb(86, 86,86);
+    }
+</style>
+
+<body>
+    <!--navigation bar-->
+    <header id="start">
+        <nav id="navigation_link">
+            <ul id="nav_list">
+                <li><a href="#home">&nbsp;<i class="fa-solid fa-house-user"></i></a><span>Home</span> </li>
+                <li><a href="#services">&nbsp;<i class="fa-solid fa-hand-holding-medical"></i></a><span>Services</span>
+                </li>
+                <li><a href="#about-us">&nbsp;<i class="fa-solid fa-circle-info"></i></a><span>About</span></li>
+                <li><a href="#our-doctors">&nbsp;<i
+                            class="fa-solid fa-stethoscope"></i></a><span>Our&nbsp;Doctors</span></li>
+                <li><a href="#login">&nbsp;<i class="fa-solid fa-hospital-user"></i></a><span>Login</span></li>
+                <li><a href="#registration">&nbsp;<i class="fa-solid fa-id-card"></i></a><span>Registration</span></li>
+                <li><a href="#login">&nbsp;<i class="fa-solid fa-user-doctor"></i></a><span>Appointment</span>
+                </li>
+                <li><a href="#blogs">&nbsp;<i class="fa-solid fa-table-cells-large"></i></a><span>Blogs</span></li>
+                <li><a href="#review">&nbsp;<i class="fa-solid fa-notes-medical"></i></a><span>Review</span></li>
+                <li><a href="#gallery">&nbsp;<i class="fa-solid fa-table-cells"></i></i></a><span>Gallery</span></li>
+                <li><a href="#contact-us">&nbsp;<i class="fa-solid fa-phone"></i></i></a><span>Contact&nbsp;us</span>
+                </li></ul>
+        </nav>
+    </header>
+    <main id="dashboard">
+        <!-- appointement-->
+        <section id="appointement"><br><br>
+            <h1>ACED Hospital, Chandigarh</h1>
+            <div class="Logo">
+                <img src="home_page/hospital_logo.jpeg" alt="Hospital" style="width:10%;border-radius:5%"><br>
+                <h3>Book Appointment</h3>
+            </div>
+            <form action="" style="width: 100%;">
+                <table class="center">
+                    <tr>
+                        <td><label for="name">Name* </label></td>
+                        <td><input type="text" placeholder="e.g Ranjit Singh" name="name" id="name" required></td>
+                        <td><label for="email">Email</label></td>
+                        <td><input type="mail" placeholder="e.g sample@gmail.com" name="email" id="email"><br></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+
+                    </tr>
+                    <tr>
+                        <td><label for="phonenumber">Mobile* </label></td>
+                        <td><input type="tel" placeholder="e.g 9988776655" id="phonenumber" name="phonenumber"
+                                required><br></td>
+                        <td><label for="date">Select Date*</label></td>
+                        <td><input type="date" id="date" name="date" required></td>
+                        <td></td>
+                    </tr>
+                    <caption style="caption-side: bottom;">
+                        <br><br>
+                        <button class="button" type="submit">Book Now</button>
+                    </caption>
+                </table>
+
+                <br><br><br>
+            </form>
+        </section>
+
+        <!-- Home and main content -->
+        <section class="main-content" id="home">
+            <div id="searchbar">
+                <img src="home_page/group_of_doctors.jpg" alt="image" style="width:100%;height: auto;">
+                <div>
+                    <form action="">
+                        <label for="searchvalue"><img src="home_page/magnifying-glass.png" alt="&nbsp;"></label>
+                        <input type="search" name="searchvalue" id="searchvalue" placeholder="search">
+                    </form>
+                </div>
+            </div>
+            <div id="image-heading">
+                <img src="/home_page/pexels-pixabay-236380.jpg" alt="image" style="width:50%;">
+                <img src="home_page/pexels-lab.jpg" alt="image" style="width:50%">
+                <div class="overlap">
+                    <br>
+                    <h1>ACED Hospital</h1> <br><br><br>
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sequi fugit eos exercitationem
+                    molestiae necessitatibus et nisi laborum. Architecto, placeat tempore! Lorem ipsum dolor sit
+                    amet consectetur adipisicing elit. Voluptatibus, laborum. Temporibus, asperiores dolore
+                    corporis cum a rem, consequatur ut blanditiis numquam laboriosam maxime itaque? Quia soluta
+                    modi recusandae incidunt odio veritatis consectetur molestias odit! Corrupti, id dolor
+                    explicabo ut fuga hic! Inventore, dolorum. Corrupti quas velit dignissimos repellendus
+                    soluta sint iste. Enim nemo ratione quod nisi vitae amet obcaecati! Eum facilis atque
+                    lorem100
+                </div>
+        </section>
+        <section class="main-content">
+            </div>
+
+            <table id="main_inner"">
+                <caption style=" text-align:left">
+                <h1><u>Recommendations</u></h1>
+                </caption>
+                <thead>
+                    <tr>
+                        <td style="width:50%"><a href="#our-doctors">
+                                <img src="home_page/doctor1.png" alt="image" style="width:80%"></a></td>
+                        <td style="width:50%"><a href="#our-doctors">
+                                <img src="home_page/doctor2.png" alt="image" style="width:90%"></a></td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div><b><u>Dr. xyz</u></b><br> Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Ipsam, recusandae
+                            </div>
+                        </td>
+                        <td>
+                            <div><b><u>Dr. abc</u></b><br> Lorem ipsum dolor, sit amet consectetur
+                                adipisicing elit. Optio, sint?
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td class="links" style="text-align:right"><a href="#our-doctors">Show&nbsp;more</a>
+                    </tr>
+                </tfoot>
+            </table>
+
+            <div id="top-services">
+                <h2 align="center"><u>Top services</u></h2>
+                <article>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eligendi vel neque corrupti
+                        sint ipsam? Corrupti doloremque labore beatae molestiae quam, explicabo sequi sit amet,
+                        nisi molestias cum. Molestias esse, deleniti commodi cumque recusandae tempora
+                        distinctio, atque eum amet, voluptate voluptas nam. Expedita corporis, culpa totam
+                        beatae dolores aperiam, quis tempora voluptates reiciendis accusantium placeat rerum hic
+                        voluptate consequuntur. Voluptatum vitae neque at odit impedit odio, cumque est hic
+                        molestias error rem minima blanditiis iure sunt dicta inventore. Assumenda, quo minima
+                        vel, beatae esse error accusamus vero ducimus debitis voluptate accusantium sed sequi
+                        aliquid nisi ab sapiente est consequatur voluptatum neque.</p>
+                    <div id="one">
+                        <h3>
+                            <center><u>Ambulance</u></center>
+                        </h3>
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat commodi beatae ipsum!
+                        Nobis, veritatis corrupti nesciunt delectus veniam illum accusantium exercitationem
+                        molestiae dolores saepe earum accusamus repellat ipsum. Nulla assumenda consectetur
+                        molestias ullam libero saepe deserunt eos aspernatur inventore vero officia perspiciatis
+                        architecto beatae quae sequi, iure sapiente recusandae id quo vitae itaque. Inventore
+                        laboriosam et eum beatae sed suscipit odit quam laudantium eaque omnis, tenetur iusto
+                        incidunt facilis! Maiores quos unde quidem est similique quas magni at fugit commodi
+                        distinctio! Aperiam minima facilis voluptate unde quibusdam ipsa? Illo quasi illum
+                        labore
+                        blanditiis? Numquam eveniet quia, quas perferendis assumenda reiciendis. F
+                    </div>
+                    <div id="two">
+                        <h3>
+                            <center><u>lorem</u></center>
+                        </h3>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt quo facilis explicabo,
+                        totam sed consequatur ullam cumque vero distinctio architecto nesciunt, iusto ipsa quas
+                        fugiat sunt culpa veniam! Recusandae iusto, quidem dicta quis voluptatem rem, possimus
+                        est
+                        vero fuga mollitia inventore, itaque dolores ipsa! Libero quasi, perferendis possimus
+                        iste
+                        nemo omnis nobis excepturi similique qui laudantium dolores animi laboriosam. Atque
+                        expedita
+                        sunt quasi quos, dignissimos illo hic iusto nemo quaerat alias exercitationem corporis
+                        laborum totam explicabo, inventore commodi! Eligendi nobis nesciunt ex? Eligendi
+                        reprehenderit perferendis quam necessitatibus eos accusantium! Facilis architecto
+                        ratione
+                        minus, dicta quam ducimus saepe nulla aspernatur ut?
+                    </div>
+                    <div id="three">
+                        <h3>
+                            <center><u>DOCTORS</u></center>
+                        </h3>
+                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Exercitationem, molestias, ab
+                        nobis dolorum veritatis maxime dolores excepturi nisi ea soluta mollitia, repellendus
+                        eaque
+                        saepe. Eius voluptatum aperiam voluptate voluptas, sint dignissimos. Aliquam in ad
+                        maiores.
+                        Autem tempore labore optio perspiciatis, deleniti minus assumenda ea laboriosam
+                        repudiandae
+                        eum voluptate molestias illum facere perferendis dolorem soluta rem aut dolore nisi
+                        dignissimos repellendus nihil culpa, asperiores exercitationem. Sequi nobis eveniet rem
+                        sint
+                        dolores. Odit saepe autem ad optio sit, culpa ipsam deserunt omnis facilis, in dolorem
+                        quam
+                        molestias corrupti asperiores ducimus laborum ut. Consequatur, aspernatur dolore ad
+                        dignissimos doloribus totam aliquid esse iusto.
+                    </div>
+                </article>
+                <div class="links services-link">
+                    <a href="#one">1</a>
+                    <a href="#two">2</a>
+                    <a href="#three">3</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- services -->
+        <section id="services">
+            <img src="/home_page/hospital4.webp" alt="img">
+            <div class="overlap">
+                <ul id="facilities">
+                    <h1>Facilities</h1>
+                    <li>&nbsp;</li>
+                    <li><a href="wards_and_rooms.html" target="service-frame"> Wards and Rooms </a> </li>
+                    <li><a href="lab_and_diagnostics.html" target="service-frame"> Lab Test and Diagonistics </a> </li>
+                    <li><a href="emergency.html" target="service-frame"> Emergency & Trauma care </a> </li>
+                    <li><a href="home_services.html" target="service-frame"> Homecare Services </a> </li>
+                    <li><a href="critical_care_unit.html" target="service-frame"> Critical Care Unit </a> </li>
+                    <li><a href="air_ambulance.html" target="service-frame"> Air Ambulance </a> </li>
+                    <li><a href="patient_support.html" target="service-frame"> Patient Support Servies </a> </li>
+                </ul>
+                <iframe src="" frameborder="0" name="service-frame" id="service-frame"></iframe>
+            </div>
+        </section>
+
+        <!-- about us-->
+        <section id="about-us">
+            <h1>ABOUT US</h1>
+            <br>
+            <h3><u>We Take Care Of Your Healthy Life</u></h3><br>
+            <p>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Iure Ducimus, Quod Ex Cupiditate Ullam In
+                Assumenda
+                Maiores Et Culpa Odit Tempora Ipsam Qui, Quisquam Quis Facere Iste Fuga, Minus Nesciunt.
+
+                Lorem Ipsum Dolor, Sit Amet Consectetur Adipisicing Elit. Natus Vero Ipsam Laborum Porro Voluptates
+                Voluptatibus A Nihil Temporibus Deserunt Vel?</p><br>
+            <table>
+                <tr>
+                    <td class="One">
+                        <div>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Iure Ducimus, Quod Ex Cupiditate
+                            Ullam In Assumenda Maiores Et Culpa Odit Tempora Ipsam Qui, Quisquam Quis Facere Iste Fuga,
+                            Minus
+                            Nesciunt.
+
+                            Lorem Ipsum Dolor, Sit Amet Consectetur Adipisicing Elit. Natus Vero Ipsam Laborum Porro
+                            Voluptates
+                            Voluptatibus A Nihil Temporibus Deserunt Vel?</div><br>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="Two">
+                        <div>Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Iure Ducimus, Quod Ex Cupiditate
+                            Ullam In Assumenda Maiores Et Culpa Odit Tempora Ipsam Qui, Quisquam Quis Facere Iste Fuga,
+                            Minus
+                            Nesciunt.
+
+                            Lorem Ipsum Dolor, Sit Amet Consectetur Adipisicing Elit. Natus Vero Ipsam Laborum Porro
+                            Voluptates
+                            Voluptatibus A Nihil Temporibus Deserunt Vel?</div><br>
+                    </td>
+                </tr>
+            </table>
+            <div class="Third">Lorem Ipsum Dolor Sit Amet Consectetur, Adipisicing Elit. Iure Ducimus, Quod Ex
+                Cupiditate
+                Ullam In Assumenda Maiores Et Culpa Odit Tempora Ipsam Qui, Quisquam Quis Facere Iste Fuga, Minus
+                Nesciunt.
+
+                Lorem Ipsum Dolor, Sit Amet Consectetur Adipisicing Elit. Natus Vero Ipsam Laborum Porro Voluptates
+                Voluptatibus A Nihil Temporibus Deserunt Vel?</div><br>
+
+        </section>
+
+        <!-- our-doctors-->
+        <section id="our-doctors">
+            <br><br>
+            <h1>OUR DOCTORS</h1>
+            <div id="outerBox">
+                <div class="box" id="box1">
+                    <div>
+                        <img class="innerBox1"
+                            src="https://images.pexels.com/photos/5215024/pexels-photo-5215024.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="">
+                    </div>
+                    <div class="innerBox2">
+                        DR. ANTONI SHKRABA
+                    </div>
+                    <div class="innerBox3">
+                        Child Care
+                    </div>
+                    <div class="book-appointement">
+                        <a href="#">Book an appointement</a>
+                        <a href="#">Info</a>
+                    </div>
+                </div>
+                <div class="box" id="box2">
+                    <div>
+                        <img class="innerBox1"
+                            src="https://images.pexels.com/photos/5726785/pexels-photo-5726785.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="">
+                    </div>
+                    <div class="innerBox2">
+                        DR. ARTEM PODREZ
+                    </div>
+                    <div class="innerBox3">
+                        Neurology
+                    </div>
+                    <div class="book-appointement">
+                        <a href="#">Book an appointement</a>
+                        <a href="#">Info</a>
+                    </div>
+                </div>
+                <div class="box" id="box3">
+                    <div>
+                        <img class="innerBox1"
+                            src="https://images.pexels.com/photos/5452255/pexels-photo-5452255.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="">
+                    </div>
+                    <div class="innerBox2">
+                        DR. TIMA MIROSHNICHENKO
+                    </div>
+                    <div class="innerBox3">
+                        General Surgery
+                    </div>
+                    <div class="book-appointement">
+                        <a href="#">Book an appointement</a>
+                        <a href="#">Info</a>
+                    </div>
+                </div>
+                <div class="box" id="box4">
+                    <div>
+                        <img class="innerBox1"
+                            src="https://images.pexels.com/photos/3846038/pexels-photo-3846038.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="">
+                    </div>
+                    <div class="innerBox2">
+                        DR. ANNA SHVETS
+                    </div>
+                    <div class="innerBox3">
+                        Eye Specialist
+                    </div>
+                    <div class="book-appointement">
+                        <a href="#">Book an appointement</a>
+                        <a href="#">Info</a>
+                    </div>
+                </div>
+                <div class="box" id="box5">
+                    <div>
+                        <img class="innerBox1"
+                            src="https://images.pexels.com/photos/5327580/pexels-photo-5327580.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="">
+                    </div>
+                    <div class="innerBox2">
+                        DR. MIA WILLIAMS
+                    </div>
+                    <div class="innerBox3">
+                        Health Checkup
+                    </div>
+                    <div class="book-appointement">
+                        <a href="#">Book an appointement</a>
+                        <a href="#">Info</a>
+                    </div>
+                </div>
+                <div class="box" id="box6">
+                    <div>
+                        <img class="innerBox1"
+                            src="https://images.pexels.com/photos/6129203/pexels-photo-6129203.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt="">
+                    </div>
+                    <div class="innerBox2">
+                        DR. RODNAE
+                    </div>
+                    <div class="innerBox3">
+                        Dermatology
+                    </div>
+                    <div class="book-appointement">
+                        <a href="#">Book an appointement</a>
+                        <a href="#">Info</a>
+                    </div>
+                </div>
+                <div class="book-appointement" style="width:96%;text-align:right"><a href="#">Show more</a></div>
+            </div><br>
+            <br><br>
+        </section>
+
+        <!-- for login-->
+        <section id="login">
+            <div id="container">
+                <form action="">
+                    <br>
+                    <img src="https://uxwing.com/wp-content/themes/uxwing/download/21-medical-science-lab/doctor.png"
+                        alt="ADEC Hospital" style="width: 10%;height: 10%;">
+                    <h1>LOGIN</h1>
+                    <table>
+                        <tr>
+                            <td>
+                                <label for="selection">Login As</label>
+                            </td>
+                            <td>
+                                <select name="option" id="selection" required>
+                                    <option value="none">--select--</option>
+                                    <option value="admin">Doctor</option>
+                                    <option value="Patient">Patient</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="username">Username</label>
+                            </td>
+                            <td>
+                                <input id="username" type="text" name="username" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="password">Password</label>
+                            </td>
+                            <td>
+
+                                <input id="password" type="password" name="password" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="text-align:center">
+                                <input type="submit" value="Login" onclick="check()">
+                            </td>
+                        </tr>
+                        <caption style="caption-side: bottom;">
+                            <span> New Member? <a href="#registration">Register Yourself first</a></span>
+                        </caption>
+                    </table>
+
+
+                </form>
+            </div>
+        </section>
+
+        <!-- for registration-->
+        <section id="registration">
+            <h1>ACED Hospital, Chandigarh</h1>
+            <div class="Logo">
+                <img src="home_page/hospital_logo.jpeg" alt="Hospital" style="width:10%;border-radius:5%"><br>
+                <h3>Registration form</h3>
+            </div>
+            <form action="" style="width:100%">
+                <table class="center">
+                    <tr>
+                        <td><label for="fname">First Name*</label></td>
+                        <td><input type="text" id="fname" name="first name" placeholder="e.g Ranjit" required></td>
+                        <td><label for="myemail">Email</label></td>
+                        <td><input type="mail" id="myemail" name="mail" placeholder="e.g. sample@gmail.com"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="lname">Last Name*</label></td>
+                        <td><input type="text" id="lname" name="last name" placeholder="e.g. Singh" required><br></td>
+                        <td><label for="dob">Birth Date*</label></td>
+                        <td><input type="date" id="dob" name="dob" required><br></td>
+                    </tr>
+                    <tr>
+                        <td><label>Mobile*</label></td>
+                        <td><input type="tel" placeholder="e.g.9979912345" required><br></td>
+                        <td><label>Permanent Adress(Postal Address)*</label></td>
+                        <td><textarea name="address" id="address" cols="30" rows="5"
+                                placeholder="e.g.Quark Media House, A-45, Phase VIII-B, Mohali - 160071, Punjab, India"
+                                required></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="bloodgroup">bloodgroup</label>
+                        </td>
+                        <td>
+                            <select name="bloodgroup" id="bloodgroup">
+                                <option value="Unknown" selected>Unknown</option>
+                                <option value="A+">A+</option>
+                                <option value="B+">B+</option>
+                                <option value="C+">C+</option>
+                                <option value="D+">D+</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="uplaodfile">Uplaod your image</label>
+                        </td>
+                        <td>
+                            <input type="file" id="uploadfile" name="file">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="password">Password *</label>
+                        </td>
+                        <td>
+                            <input type="password" id="password" name="password" required>
+                        </td>
+                        <td>
+                            <label for="gender">Gender</label>
+                        </td>
+                        <td>
+                            <select id="gender" name="gender">
+                                <option value="Female" selected>Female</option>
+                                <option value="Transgender" selected>Transgender</option>
+                                <option value="Male" selected>Male</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="conpassword">Confirm password*</label>
+                        </td>
+                        <td>
+                            <input type="password" id="conpassword" name="conpassword" required>
+                        </td>
+                        <td><input type="checkbox" name="t&c" for="t&c" required></td>
+                        <td><label for="t&c">I accept terms & conditions*</label></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4" id="caption">
+                            <span style="color:red">Fields marked with * are mandatory</span>
+                            <button class="button" type="reset">Reset</button>
+                            <button class="button" type="submit">Submit</button>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <br><br><br>
+        </section>
+
+        <!-- blogs -->
+        <section id="blogs">
+            <hr style="width:100%;text-align:center">
+            <h1>BLOGS</h1>
+            <div id="outerBox">
+                <div class="box">
+                    <div><img src="https://nirravv.github.io/Hospital-Management-Html/assets/img/blogs/1.jpg" alt="">
+                    </div>
+                    <div class="que"><a class="que" href="#">How to maintain bone and joint health during winters?</a>
+                    </div>
+                    <p>
+                        It is usually due to restricted absorption of Vitamin D (sunlight) in your body during winter or
+                        due to
+                        decreased blood flow to bones to increase body temperature or due to restricted mobility to
+                        conserve
+                        energy which allows accumulation of inflammatory markers or toxins in joints. This leads to
+                        stiffness
+                        and pain in joints. Ignoring problems related to bones and joints which can lead to further
+                        deterioration.
+                        <br><br>
+                        These are few tips to keep your joints and muscles healthy during this winter :-
+                        <br><br>
+                        1) A balanced diet is key to overall healthy living. Eat a diet which comprises of fruits,
+                        vegetables,
+                        cereals, dairy products and pulses.
+                        <br>
+                        2) Eat foods rich in Vitamin K, D and C.
+                        <br>
+                        3) Physical activity is also important. Exercising strengthens the muscles and maintains weight.
+                        <br>
+                        4) Do not over eat and reduce weight.
+                        <br><br>
+                    <div class="author">
+                        By Dr. Ramneek Mahajan | December 31, 2020
+                    </div>
+
+                    </p>
+                </div>
+                <div class="box">
+                    <div><img src="https://nirravv.github.io/Hospital-Management-Html/assets/img/blogs/2.jpg" alt="">
+                    </div>
+                    <div class="que"><a class="que" href="#">Robot Assisted Kidney Transplant in France</a></div>
+                    <p>
+                        First robot assisted kidney transplant (RAKT) was performed in France in 2002. Since then, it is
+                        gradually gaining foothold in transplant arena. Majority of work is being done in India, Europe
+                        and few
+                        centres in USA. World wide experience has established its functional outcomes comparable to open
+                        transplant. The patient has got multiple benefits :-
+                        <br><br>
+                        1) Lesser pain – early mobility, early recovery
+                        <br>
+                        2) Less chance of wound infection – no adverse effect on graft function
+                        <br>
+                        3) Less blood loss, Minimal scars, improved cosmetic effects
+                        <br><br>
+                    <div class="author">
+                        By Dr. Anant Kumar | December 31, 2020
+                    </div>
+
+                    </p>
+                </div>
+                <div class="box">
+                    <div><img src="https://nirravv.github.io/Hospital-Management-Html/assets/img/blogs/3.jpg" alt="">
+                    </div>
+                    <div class="que"><a class="que" href="#">Body Weight - What you must know!</a></div>
+                    <p>
+                        Q: Why is body weight so important to us?
+                        <br>
+                        A: Bodyweight is a vital part of our physical and mental health.
+                        <br><br>
+                        Q: What is an ideal body weight?
+                        <br>
+                        A: There is no single defined value for an ideal weight. The ideal weight for a person depends
+                        on their
+                        height and age.
+                        <br><br>
+                        Q: Why is there a weight range?
+                        <br>
+                        A: Your weight depends upon a number of factors. These include your age, muscle mass fat mass,
+                        gender
+                        and body shape.
+                        <br><br>
+                    <div class="author">
+                        By Dr. Vandana Soni | December 31, 2020
+                    </div>
+                    </p>
+                </div>
+                <div class="box">
+                    <div><img src="https://nirravv.github.io/Hospital-Management-Html/assets/img/blogs/4.jpg" alt="">
+                    </div>
+                    <div class="que"><a class="que" href="#">IMPORTANCE OF SLEEP IN BRAIN HEALTH</a></div>
+                    <p>
+                        Those mood swings are for real…. Your brain regulates the hormones and the neurotrasnmitters.
+                        These
+                        chemicals are basically responsible for the way you feel. Chemical compounds like dopamine,
+                        serotonin,
+                        oxytocin help us feeling good, happy and upbeat. Sleep plays an important role in their
+                        regulation. Lack
+                        of sleep can make you irritated, impulsive and angry. The moments when you over react and have
+                        an
+                        outburst are more likely to happen when you have not slept well.
+                        <br><br>
+                        Lack of sleep makes you slow. Sleep deprivation slows down the brain’s ability to react quickly.
+                        Tired
+                        drivers and pilots tend to have more accidents and that is a well known fact. Sleep deprivation
+                        slows
+                        down the brain akin to getting drunk. Just like you should not be driving under the influence of
+                        alcohol
+                        the same applies to sleep deprivation.
+                        <br><br>
+                    <div class="author">
+                        By Dr. Manish Baijal | December 31, 2020
+                    </div>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- review -->
+        <section id="review">
+            <hr style="width: 100%;">
+            <h1 id="top">CLIENT'S REVIEW</h1>
+            <div id="outerBox">
+                <div class="box">
+                    <div class="photo"><img class="image"
+                            src="https://images.pexels.com/photos/3586798/pexels-photo-3586798.jpeg?auto=compress&cs=tinysrgb&w=100&h=190&dpr=1"
+                            alt=""> </div>
+                    <div class="stars">4.8/5</div>
+                    <div class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus at
+                        praesentium architecto nihil vero nostrum obcaecati iusto cupiditate illo. Aliquam, fugiat
+                        maxime? Sit eaque dolores, recusandae fuga voluptatibus hic perferendis atque pariatur enim
+                        quam.</div>
+                    <div class="name">Jaime Rivera</div>
+                </div>
+                <div class="box">
+                    <div class="photo"><img class="image"
+                            src="https://images.pexels.com/photos/2811087/pexels-photo-2811087.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt=""></div>
+                    <div class="stars">4.9/5</div>
+                    <div class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus at
+                        praesentium architecto nihil vero nostrum obcaecati iusto cupiditate illo. Aliquam, fugiat
+                        maxime? Sit eaque dolores, recusandae fuga voluptatibus hic perferendis atque pariatur enim
+                        quam.</div>
+                    <div class="name">Ali Pazani</div>
+                </div>
+                <div class="box">
+                    <div class="photo"><img class="image"
+                            src="https://images.pexels.com/photos/1028927/pexels-photo-1028927.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt=""></div>
+                    <div class="stars">4.5/5</div>
+                    <div class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus at
+                        praesentium architecto nihil vero nostrum obcaecati iusto cupiditate illo. Aliquam, fugiat
+                        maxime? Sit eaque dolores, recusandae fuga voluptatibus hic perferendis atque pariatur enim
+                        quam.</div>
+                    <div class="name">Kate</div>
+                </div>
+                <div class="box">
+                    <div class="photo"><img class="image"
+                            src="https://images.pexels.com/photos/1906815/pexels-photo-1906815.jpeg?auto=compress&cs=tinysrgb&w=600"
+                            alt=""></div>
+                    <div class="stars">4.7/5</div>
+                    <div class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus at
+                        praesentium architecto nihil vero nostrum obcaecati iusto cupiditate illo. Aliquam, fugiat
+                        maxime? Sit eaque dolores, recusandae fuga voluptatibus hic perferendis atque pariatur enim
+                        quam.</div>
+                    <div class="name">Alessio Cesario</div>
+                </div>
+                <div class="box">
+                    <div class="photo"><img class="image"
+                            src="https://images.pexels.com/photos/2049391/pexels-photo-2049391.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt=""></div>
+                    <div class="stars">5/5</div>
+                    <div class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus at
+                        praesentium architecto nihil vero nostrum obcaecati iusto cupiditate illo. Aliquam, fugiat
+                        maxime? Sit eaque dolores, recusandae fuga voluptatibus hic perferendis atque pariatur enim
+                        quam.</div>
+                    <div class="name">Jônatas Pereira</div>
+                </div>
+                <div class="box">
+                    <div class="photo"><img class="image"
+                            src="https://images.pexels.com/photos/3207694/pexels-photo-3207694.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                            alt=""></div>
+                    <div class="stars">4.9/5</div>
+                    <div class="review">Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus at
+                        praesentium architecto nihil vero nostrum obcaecati iusto cupiditate illo. Aliquam, fugiat
+                        maxime? Sit eaque dolores, recusandae fuga voluptatibus hic perferendis atque pariatur enim
+                        quam.</div>
+                    <div class="name">Marcela Oliveira</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- gallery -->
+        <section id="gallery">
+            <hr style="width: 100%;">
+            <div id="gallery-heading" style="width:100%">
+                <h1>GALLERY</h1>
+                <p>
+                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos, illo?
+                </p>
+            </div>
+            <div class="column">
+                <figure>
+                    <img src="/gallery/akram-huseyn-brbF5FSnSgI-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/akram-huseyn-V_0ES17m9Tc-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/martha-dominguez-de-gouveia-nMyM7fxpokE-unsplash (1).jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/markus-frieauff-IJ0KiXl4uys-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="/gallery/cdc-7uSvaBY69d0-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/derek-finch-bD1bK7IUvd8-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+
+            </div>
+            <div class="column">
+                <figure>
+                    <img src="/gallery/jonathan-borba-rv_MDIv8lrA-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="/gallery/national-cancer-institute-DK--4VWK1tw-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/national-cancer-institute-KrsoedfRAf4-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/jonathan-borba-hl6uG9cHW5A-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/eugene-chystiakov-ewUmxFzUiQs-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/daniel-schludi-mAGZNECMcUg-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+
+            </div>
+            <div class="column">
+                <figure>
+                    <img src="/gallery/mulyadi-JeCNRxGLSp4-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/alexandr-podvalny-tE7_jvK-_YU-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/ashkan-forouzani-ignxm3E1Rg4-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/marcelo-leal-6pcGTJDuf6M-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/manik-roy-lYVQm_WYXJk-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/national-cancer-institute-DK--4VWK1tw-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+
+            </div>
+            <div class="column">
+                <figure>
+                    <img src="/gallery/national-cancer-institute-701-FJcjLAQ-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/jc-gellidon-9Eb-bpTXglM-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/jafar-ahmed-E285pJbC4uE-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/national-cancer-institute-L8tWZT4CcVQ-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/obi-pixel6propix-T5TojXFNnjk-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/olga-guryanova-tMFeatBSS4s-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+                <figure>
+                    <img src="/gallery/wesley-tingey-0are122T4ho-unsplash.jpg">
+                    <figcaption>Some description</figcaption>
+                </figure>
+            </div>
+        </section>
+
+
+        <!-- contact us -->
+        <footer id="contact-us">
+            <h1>Contact Form</h1>
+
+            <form id="form">
+                <table>
+
+                    <tr>
+                        <td>
+                            <label for="name">Name* </label>
+                        </td>
+                        <td><input type="text" id="name" name="name" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="mail">Mail </label></td>
+                        <td><input type="mail" id="mail" name="mail"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="subject">Subject</label>
+                        </td>
+                        <td>
+                            <input type="text" id="subject" name="subject">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label for="message">Message*</label>
+                        </td>
+                        <td>
+                            <textarea name="message" id="message" cols="30" rows="10" placeholder="Enter your message"
+                                required></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><button type="reset" value="Reset">Reset</button></td>
+                        <td><button type="submit" value="Submit">Submit</button></td>
+                    </tr>
+                </table>
+            </form>
+            <div id="contact-info">
+                <p class="para">
+                    Adress: <br>
+                    #Chandigarh, IND <br>
+                    email: acedhospital@gmail.com <br>
+                    Phone number: 9988776655 <br>
+                    www.ACED.com <br>
+                </p>
+                <p class="para">
+                    <b>Business Hours</b><br>
+                    Monday-Sunday:24/7 Available <br>
+                    Sunday: 4 am to 11 pm <br>
+                </p>
+                <p class="para">
+                    <b>Why choose us ?</b><br>
+                    #24/7 Ambulance Support <br>
+                    #Emminent annd Experienced doctors <br>
+                    #Multiple options for treatement
+                </p>
+            </div>
+        </footer>
+
+        <!-- footer -->
+        <footer id="footer">
+            <div id="footUp">
+                <div id="about">
+                    <div id="logo">
+                        ACED
+                    </div>
+                    <div id="abt">
+                        At ACED Hospital, we are convinced that 'quality' and 'lowest cost' are not mutually exclusive
+                        when it comes to healthcare delivery.
+                        <br><br>
+                        Our mission is to deliver high quality, affordable healthcare services to the broader population
+                        in India.
+                    </div>
+                </div>
+                <div id="quickLinks">
+                    <h2 class="footUpHeads">Quick Links</h2>
+                    <div class="head_line">
+                        <hr>
+                    </div>
+                    <br>
+                    <a class="footUpCategories" href="#home">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>HOME
+                    </a><br>
+                    <a class="footUpCategories" href="#services">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>SERVICES
+                    </a><br>
+                    <a class="footUpCategories" href="#about">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>ABOUT
+                    </a><br>
+                    <a class="footUpCategories" href="#our-doctors">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>DOCTORS
+                    </a><br>
+                    <a class="footUpCategories" href="#review">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>REVIEW
+                    </a><br>
+                    <a class="footUpCategories" href="#blogs">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>BLOGS
+                    </a>
+                </div>
+                <div id="ourServices">
+                    <h2 class="footUpHeads">Our Services</h2>
+                    <div class="head_line">
+                        <hr>
+                    </div>
+                    <br>
+                    <a class="footUpCategories" href="#">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>DENTAL CARE
+                    </a><br>
+                    <a class="footUpCategories" href="#">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>MESSAGE THERAPY
+                    </a><br>
+                    <a class="footUpCategories" href="#">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>CARDIOLOGY
+                    </a><br>
+                    <a class="footUpCategories" href="#">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>DIAGNOSIS
+                    </a><br>
+                    <a class="footUpCategories" href="#">
+                        <ion-icon name="chevron-forward-outline"></ion-icon>AMBULANCE SERVICE
+                    </a>
+                </div>
+                <div id="contactUs">
+                    <h2 class="footUpHeads">Contact Us</h2>
+                    <div class="head_line">
+                        <hr>
+                    </div>
+                    <br>
+                    <div class="contctUs">ACED Hospital</div>
+                    <div class="contctUs">Chandigarh, INDIA</div>
+                    <div class="contctUs">Phone: +91 987 799 2241</div>
+                    <div class="contctUs"><a href="mailto:acedhospital@gmail.com" id="mail">acedhospital@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+            <div id="footDown">
+                <div id="rightsReserved">
+                    <span id="allRiRe1">2022 @ All Rights Reserved.&nbsp;&nbsp;</span>
+                    <span id="allRiRe2">Privacy Policy |</span>
+                    <span id="allRiRe3">&nbsp;Terms of Service</span>
+                </div>
+                <div id="socialMediaLinks">
+                    <a class="footlink" href="https://Google.com/" target="_blank">
+                        <ion-icon name="logo-google"></ion-icon>
+                    </a>
+                    <a class="footlink" href="https://facebook.com/" target="_blank">
+                        <ion-icon name="logo-facebook"></ion-icon>
+                    </a>
+                    <a class="footlink" href="https://twitter.com/" target="_blank">
+                        <ion-icon name="logo-twitter"></ion-icon>
+                    </a>
+                    <a class="footlink" href="https://linkedin.com/" target="_blank">
+                        <ion-icon name="logo-linkedin"></ion-icon>
+                    </a>
+                    <a class="footlink" href="https://Pinterest.com/" target="_blank">
+                        <ion-icon name="logo-pinterest"></ion-icon>
+                    </a>
+                    <a class="footlink" href="https://instagram.com/" target="_blank">
+                        <ion-icon name="logo-instagram"></ion-icon>
+                    </a>
+                </div>
+            </div>
+        </footer>
+
+    </main>
+
+</body>
+
+</html>
